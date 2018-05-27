@@ -1,0 +1,37 @@
+TARGETNAME=Unscramble
+TARGETTYPE=PROGRAM
+
+_NT_TARGET_VERSION=$(_NT_TARGET_VERSION_VISTA)
+UMTYPE=console
+UMENTRY=main
+MSC_WARNING_LEVEL= /W4 /WX
+USE_LIBCMT=1
+
+C_DEFINES=$(C_DEFINES) -D_USE_WPP_TRACING
+USER_C_FLAGS=$(USER_C_FLAGS) /EHa
+
+INCLUDES= \
+        $(MINWIN_PRIV_SDK_INC_PATH);\
+
+SOURCES= \
+        avlnode.cpp     \
+        avltree.cpp     \
+        dictbs.cpp      \
+        dictls.cpp      \
+        dictavl.cpp     \
+        unscramble.cpp  \
+        unscramble.rc
+
+#
+# This sets up the WPP preprocessor and tells it to scan wtrace.h to find
+# the trace function definition that's in there.
+#
+WPP_HELPERS=$(MINWIN_PRIV_SDK_INC_PATH)\wtracehelper.h
+!if $(FREEBUILD)
+RUN_WPP=-ext:.cpp.h.H -preserveext:.h.H \
+        $(SOURCES) -scan:$(MINWIN_PRIV_SDK_INC_PATH)\wtrace.h
+!else
+RUN_WPP=-ext:.cpp.h.H -preserveext:.h.H \
+        $(SOURCES) $(WPP_HELPERS) -scan:$(MINWIN_PRIV_SDK_INC_PATH)\wtraced.h
+!endif
+

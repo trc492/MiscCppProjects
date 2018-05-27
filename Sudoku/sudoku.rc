@@ -1,0 +1,28 @@
+#define VER_FILETYPE                    VFT_APP
+#define VER_FILESUBTYPE                 VFT2_UNKNOWN
+#define VER_FILEDESCRIPTION_STR         "Sudoku Solver"
+#define VER_INTERNALNAME_STR            "Sudoku.exe"
+#define VER_ORIGINALFILENAME_STR        "Sudoku.exe"
+
+#include <winver.h>
+#include <ntverp.h>
+#include "resource.h"
+
+#ifdef VER_PRODUCTMAJORVERSION
+  #undef VER_PRODUCTMAJORVERSION
+#endif
+#ifdef VER_PRODUCTMINORVERSION
+  #undef VER_PRODUCTMINORVERSION
+#endif
+#ifdef VER_PRODUCTBUILD
+  #undef VER_PRODUCTBUILD
+#endif
+#ifdef VER_PRODUCTBUILD_QFE
+  #undef VER_PRODUCTBUILD_QFE
+#endif
+#define VER_PRODUCTMAJORVERSION         VERSION_MAJOR
+#define VER_PRODUCTMINORVERSION         VERSION_MINOR
+#define VER_PRODUCTBUILD                VERSION_BUILD
+#define VER_PRODUCTBUILD_QFE            0
+#include <common.ver>
+
